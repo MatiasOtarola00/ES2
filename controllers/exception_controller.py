@@ -1,7 +1,7 @@
 def validar_nombre(mensaje):
     while True:
         valor = input(mensaje)
-        if valor.isalpha():  # Asegurarse de que el nombre solo contiene letras
+        if valor.isalpha(): 
             return valor
         else:
             print("Entrada inválida. Por favor, ingrese solo letras.")
@@ -25,7 +25,7 @@ def validar_entero(mensaje):
 def validar_telefono(mensaje):
     while True:
         valor = input(mensaje)
-        if valor.isdigit():  # Asegurarse de que el teléfono solo contiene dígitos
+        if valor.isdigit(): 
             return valor
         else:
             print("Entrada inválida. Por favor, ingrese solo números.")

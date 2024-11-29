@@ -1,10 +1,9 @@
-# views/menu_view.py
 from controllers.empleado_controller import crear_empleado, obtener_empleados, actualizar_empleado, eliminar_empleado
 from controllers.departamento_controller import crear_departamento, obtener_departamentos, actualizar_departamento, eliminar_departamento
 from controllers.proyecto_controller import crear_proyecto, obtener_proyectos, actualizar_proyecto, eliminar_proyecto
 from controllers.exception_controller import validar_nombre, validar_numero, validar_entero, validar_telefono
-from controllers.usuario_controller import agregar_usuario, listar_usuarios
-from controllers.indicadores_controller import mostrar_indicadores
+from controllers.usuario_controller import agregar_usuario, listar_usuarios, eliminar_usuario
+from controllers.indicadores_controller import main_api
 from models.db import crear_tablas
 
 def mostrar_menu():
@@ -32,7 +31,7 @@ def mostrar_menu():
             opcion = input("Elige una opción: ")
 
             if opcion not in [str(i) for i in range(1, 16)]:
-                raise ValueError("Opción inválida. Por favor, elige una opción válida entre 1 y 13.")
+                raise ValueError("Opción inválida. Por favor, elige una opción válida entre 1 y 15.")
 
             # Gestión de Empleados
             if opcion == "1":
@@ -109,24 +108,26 @@ def mostrar_menu():
             elif opcion == "12":
                 proyecto_id = validar_entero("ID del proyecto a eliminar: ")
                 eliminar_proyecto(proyecto_id)
+            #Gestión Usuarios
             elif opcion == "13":
                 print("\n--- Gestión de Usuarios ---")
                 print("1. Crear Usuario")
                 print("2. Listar Usuarios")
+                print("3. Eliminar Usuario")
                 gestion_opcion = input("Elige una opción: ")
-                if opcion not in [str(i) for i in range(1, 3)]:
-                    raise ValueError("Opción inválida. Por favor, elige una opción válida entre 1 y 2.")
+                if gestion_opcion not in [str(i) for i in range(1, 4)]:
+                    raise ValueError("Opción inválida. Por favor, elige una opción válida entre 1 y 3.")
                 if gestion_opcion == "1":
                     agregar_usuario()
                 elif gestion_opcion == "2":
                     listar_usuarios()
+                elif gestion_opcion == "3":
+                    eliminar_usuario()
                 else:
                     print("Opción inválida en gestión de usuarios.")
+                #Api
             elif opcion == "14":
-                try:
-                    mostrar_indicadores()
-                except Exception as e:
-                    print(f"Error al consultar los indicadores económicos: {e}")
+                main_api()
             elif opcion == "15":
                 print("Saliendo del programa...")
                 break

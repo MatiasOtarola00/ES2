@@ -2,7 +2,6 @@ import bcrypt
 import mysql.connector
 from models.db import conectar
 
-# Función para autenticar un usuario existente
 def autenticar(nombre, passwd):
     conn = conectar()
     if conn is None:
@@ -14,9 +13,9 @@ def autenticar(nombre, passwd):
         usuario = cursor.fetchone()
         if usuario:
             stored_password = usuario[2]
-            # Comparar la contraseña ingresada con el hash almacenado
+            
             if bcrypt.checkpw(passwd.encode('utf-8'), stored_password.encode('utf-8')):
-                return usuario  # Retornar información del usuario si la autenticación es exitosa
+                return usuario 
             else:
                 print("Contraseña incorrecta.")
                 return None
@@ -30,7 +29,6 @@ def autenticar(nombre, passwd):
         cursor.close()
         conn.close()
 
-# Función para verificar si existen usuarios registrados
 def hay_usuarios():
     conn = conectar()
     if conn is None:
